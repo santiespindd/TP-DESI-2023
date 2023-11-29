@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Formulario Tasas e Impuestos</title>
+</head>
+
+<body>
+
+	<h2>Formulario de Tasas e Impuestos</h2>
+
+	<form th:action="@{/tasas/save}" th:object="${tasasForm}" method="post">
+		<input type="hidden" th:field="*{id}" required/>
+
+		<label>IVA:</label>
+		<input type="text" th:field="*{iva}"  required/>
+		<label>%</label>
+		<span th:if="${#fields.hasErrors('iva')}" th:errors="*{iva}"></span><br />
+		<br />
+
+		<label>Tasa Aeroportuaria Nacional:</label>
+		<input type="text" th:field="*{tasaAeroportuariaNacional}" minlength="1" required/>
+		<span th:if="${#fields.hasErrors('tasaAeroportuariaNacional')}" th:errors="*{tasaAeroportuariaNacional}"></span><br />
+		<br />
+
+		<label>Tasa Aeroportuaria Internacional:</label>
+		<input type="text" th:field="*{tasaAeroportuariaInternacional}" minlength="1" required />
+		<span th:if="${#fields.hasErrors('tasaAeroportuariaInternacional')}"
+			th:errors="*{tasaAeroportuariaInternacional}"></span><br />
+		<br />
+
+		<label>Cotización del Dólar: $</label>
+		<input type="text" th:field="*{cotizacionDolar}" minlength="1" required/>
+		<span th:if="${#fields.hasErrors('cotizacionDolar')}" th:errors="*{cotizacionDolar}"></span><br />
+		<br />
+
+		<button type="submit">Guardar</button>
+		<div th:if="${error}" class="alert alert-danger" role="alert">
+    <p th:text="${error}"></p>
+</div>
+
+	</form>
+	<button type="button" th:href="@{/tasas/tasasLista}">Cancelar</button>
+
+</body>
+
+</html>

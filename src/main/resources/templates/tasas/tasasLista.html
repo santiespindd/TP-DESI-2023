@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasas e Impuestos</title>
+</head>
+<body>
+
+<h2>Listado de Tasas e Impuestos</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>IVA</th>
+        <th>Tasa Aeroportuaria Nacional</th>
+        <th>Tasa Aeroportuaria Internacional</th>
+        <th>Cotización del Dólar</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tasas : ${tasasList}">
+        <td th:text="${tasas.id}"></td>
+        <td th:text="${tasas.iva}"></td>
+        <td th:text="${tasas.tasaAeroportuariaNacional}"></td>
+        <td th:text="${tasas.tasaAeroportuariaInternacional}"></td>
+        <td th:text="${tasas.cotizacionDolar}"></td>
+        <td>
+            <a th:href="@{/tasas/edit/{id}(id=${tasas.id})}">Editar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
