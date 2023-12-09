@@ -17,7 +17,7 @@ public class Tasas {
 
 	@DecimalMin(value = "0.00", inclusive = false, message = "El IVA debe ser mayor que 0")
     @DecimalMax(value = "100.00", message = "El IVA debe ser menor o igual a 100")
-   
+
     private BigDecimal iva;
 
     @DecimalMin(value = "0.00", message = "La tasa aeroportuaria nacional debe ser igual o mayor a 0")
