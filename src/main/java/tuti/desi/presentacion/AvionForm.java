@@ -14,7 +14,6 @@ public class AvionForm {
     
     public AvionForm() {
 		super();
-		
     }
     
 	public AvionForm(Long id, String nombre, int capacidadFilas, int asientosPorFila) {

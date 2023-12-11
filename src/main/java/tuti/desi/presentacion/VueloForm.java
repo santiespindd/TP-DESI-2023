@@ -133,5 +133,4 @@ public class VueloForm {
 		v.setEstado(this.getEstado());
 		return v;
 	}
-	
 }

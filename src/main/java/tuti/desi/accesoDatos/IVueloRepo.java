@@ -11,4 +11,5 @@ import tuti.desi.entidades.Vuelo;
 	@Repository
 	public interface IVueloRepo extends JpaRepository<Vuelo, Long> {
 		 boolean existsByFechaHoraPartidaAndAvionId(LocalDateTime fechaHoraPartida, Long avionId);
+		 
 	}

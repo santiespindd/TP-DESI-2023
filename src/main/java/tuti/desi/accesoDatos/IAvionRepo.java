@@ -6,5 +6,6 @@ import tuti.desi.entidades.Avion;
 
 		@Repository
 		public interface IAvionRepo extends JpaRepository<Avion, Long> {
+			
 		}
 
