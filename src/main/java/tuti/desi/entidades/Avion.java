@@ -56,4 +56,5 @@ public class Avion {
 		return "Avion [id=" + id + ", nombre=" + nombre + ", capacidadFilas=" + capacidadFilas + ", asientosPorFila="
 				+ asientosPorFila + "]";
 	}
+	
 }

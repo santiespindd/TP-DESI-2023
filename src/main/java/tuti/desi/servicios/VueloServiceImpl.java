@@ -22,5 +22,4 @@ public class VueloServiceImpl implements VueloService{
     public boolean existeVueloParaMismoDia(LocalDateTime fechaHoraPartida, Long avionId) {
         return repo.existsByFechaHoraPartidaAndAvionId(fechaHoraPartida, avionId);
     }
-    
 }
