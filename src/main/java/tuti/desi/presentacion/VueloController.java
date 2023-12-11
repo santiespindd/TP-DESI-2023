@@ -81,5 +81,4 @@ public class VueloController {
         vueloService.programarVuelo(vuelo);
         return ResponseEntity.ok("Vuelo programado exitosamente");
     }
-    
 }

@@ -10,7 +10,6 @@ import tuti.desi.entidades.Ciudad;
 
 public interface AvionService {
 
-
 	List<Avion> obtenerTodosLosAviones();
 	
 }

@@ -130,7 +130,6 @@ public class Vuelo {
 		this.precio = precio;
 	}
 
-	
 	public LocalDateTime getFechaHoraPartida() {
 		return fechaHoraPartida;
 	}
