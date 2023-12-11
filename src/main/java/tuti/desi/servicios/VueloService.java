@@ -14,5 +14,4 @@ public interface VueloService {
 	boolean existeVueloParaMismoDia(LocalDateTime fechaHoraPartida, Long avionId);
 	
 	void programarVuelo(Vuelo vuelo);
-
 }
