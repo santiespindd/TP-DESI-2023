@@ -1,5 +1,6 @@
 package tuti.desi.servicios;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -26,17 +27,20 @@ public class VueloServiceImpl implements VueloService{
     	repo.save(vuelo);
     }
 
-    public boolean existeVueloParaMismoDia(Date fechaPartida, Long avionId) {
+    public boolean existeVueloParaMismoDia(LocalDate fechaPartida, Long avionId) {
         return repo.existsByFechaPartidaAndAvionId(fechaPartida, avionId);
     }
 
-  
-   public List<Vuelo> consultarVuelos(Date fecha, Long origenId, Long destinoId, String tipoVuelo) {
-    	
-    	System.out.println("Consultando vuelos desde el servicio con fecha " + fecha + ", origen " + origenId + ", destino " + destinoId + ", tipo " + tipoVuelo);
+	@Override
+	public List<Vuelo> findByFechaPartida(LocalDate fecha) {
+		// TODO Auto-generated method stub
+		return repo.findByFechaPartida(fecha);
+	}
 
-        return repo.consultarVuelos(fecha, origenId, destinoId, tipoVuelo);
-    }
+	
+
+  
+   
     
    
 }

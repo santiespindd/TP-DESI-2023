@@ -1,6 +1,7 @@
 package tuti.desi.entidades;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -54,7 +55,7 @@ public class Vuelo {
     @Future(message = "La fecha de partida debe ser futura")
     @NotNull(message = "La fecha de partida es requerida")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fechaPartida;
+	private LocalDate fechaPartida;
     
     
     
@@ -80,7 +81,7 @@ public class Vuelo {
 			@NotNull(message = "El destino es requerido") Ciudad destino,
 			@NotNull(message = "El tipo de vuelo es requerido") TipoVuelo tipoVuelo,
 			@DecimalMin(value = "0.01", message = "El precio debe ser mayor a 0") BigDecimal precio,
-			@Future(message = "La fecha de partida debe ser futura") @NotNull(message = "La fecha de partida es requerida") Date fechaPartida,
+			@Future(message = "La fecha de partida debe ser futura") @NotNull(message = "La fecha de partida es requerida") LocalDate fechaPartida,
 			@NotNull(message = "La hora de partida es requerida") LocalTime horaPartida,
 			@NotNull() Avion avion, String estado) {
 		super();
@@ -146,11 +147,11 @@ public class Vuelo {
 
 	
 	
-	public Date getFechaPartida() {
+	public LocalDate getFechaPartida() {
 		return fechaPartida;
 	}
 
-	public void setFechaPartida(Date fechaPartida) {
+	public void setFechaPartida(LocalDate fechaPartida) {
 		this.fechaPartida = fechaPartida;
 	}
 

@@ -52,7 +52,7 @@ public class VuelosBuscarController {
 		
 		
         
-       
+       System.out.println(formBean.getFecha());
         
 		if (action.equals("Buscar")) {
 			
@@ -60,10 +60,9 @@ public class VuelosBuscarController {
 			try {
 				
 
-				List<Vuelo> vuelos = vueloService.consultarVuelos(formBean.getFecha(), formBean.getOrigenId(),
-						formBean.getDestinoId(), formBean.getTipoVuelo());
+				List<Vuelo> vuelos = vueloService.findByFechaPartida(formBean.getFecha());
 				System.out.println("Número de vuelos encontrados: " + vuelos.size());
-
+                
 				
 				//vuelos.sort(Comparator.comparing(Vuelo::getFechaHoraPartida));
 				model.addAttribute("resultados", vuelos);

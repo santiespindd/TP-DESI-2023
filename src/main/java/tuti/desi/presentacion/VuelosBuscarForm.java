@@ -1,5 +1,6 @@
 package tuti.desi.presentacion;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -18,17 +19,17 @@ public class VuelosBuscarForm {
 	
 	    @NotNull(message = "Debe ingresar fecha")	
 	    @DateTimeFormat(pattern = "yyyy-MM-dd")	
-	    private Date fecha;
+	    private LocalDate fecha;
 	    private Long origenId;
 	    private Long destinoId;
 	    private String tipoVuelo;
 
 	    private List<Ciudad> ciudades;
 	    private List<TipoVuelo> tiposVuelo;
-		public Date getFecha() {
+		public LocalDate getFecha() {
 			return fecha;
 		}
-		public void setFecha(Date fecha) {
+		public void setFecha(LocalDate fecha) {
 			this.fecha = fecha;
 		}
 		public Long getOrigenId() {

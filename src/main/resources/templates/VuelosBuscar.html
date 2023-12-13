@@ -11,7 +11,7 @@
 <form th:action="@{/vuelosBuscar}" th:object="${formBean}" method="post">
     <div>
         <label for="fecha">Fecha:</label>
-        <input type="date"  th:field="*{fecha}" required />
+        <input type="date" th:field="*{fecha}" required />
         <div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></div>
 
     </div>
@@ -51,7 +51,7 @@
 </form>
 
 <!-- Sección para mostrar los resultados de la consulta -->
-<div th:if="${not #lists.isEmpty(resultados)}">
+<div>
     <h3>Resultados:</h3>
     <table>
         <thead>
@@ -65,7 +65,7 @@
         </thead>
         <tbody>
             <tr th:each="vuelo : ${resultados}">
-                <td th:text="${#dates.format(vuelo.fechaPartida, 'yyyy-MM-dd ')}"></td>
+                <td th:text="${vuelo.fechaPartida}"></td>
                 <td th:text="${vuelo.numeroVuelo}"></td>
                 <td th:text="${vuelo.tipoVuelo}"></td>
                 <td th:text="${vuelo.estado}"></td>

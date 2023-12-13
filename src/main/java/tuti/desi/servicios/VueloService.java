@@ -1,5 +1,6 @@
 package tuti.desi.servicios;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -16,11 +17,11 @@ import tuti.desi.presentacion.VuelosBuscarForm;
 
 public interface VueloService {
 	
-	boolean existeVueloParaMismoDia(Date fechaPartida, Long avionId);
+	boolean existeVueloParaMismoDia(LocalDate fechaPartida, Long avionId);
 	
 	void programarVuelo(Vuelo vuelo);
 	
-    List<Vuelo> consultarVuelos(Date fecha, Long origenId, Long destinoId, String tipoVuelo);
+	List<Vuelo>  findByFechaPartida(LocalDate fecha);
     
 
 

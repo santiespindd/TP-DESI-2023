@@ -1,6 +1,7 @@
 package tuti.desi.presentacion;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -29,7 +30,7 @@ public class VueloForm {
 	
 	
     @DateTimeFormat(pattern = "yyyy-MM-dd")	
-	private Date fechaPartida;
+	private LocalDate fechaPartida;
 	
 	private LocalTime horaPartida;
 	
@@ -106,11 +107,11 @@ public class VueloForm {
 
 	
 
-	public Date getFechaPartida() {
+	public LocalDate getFechaPartida() {
 		return fechaPartida;
 	}
 
-	public void setFechaPartida(Date fechaPartida) {
+	public void setFechaPartida(LocalDate fechaPartida) {
 		this.fechaPartida = fechaPartida;
 	}
 
