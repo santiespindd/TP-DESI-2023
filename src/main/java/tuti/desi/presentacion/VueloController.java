@@ -79,7 +79,7 @@ public class VueloController {
         
         Vuelo vuelo = new Vuelo(formBean.getId(), formBean.getNumeroVuelo(), formBean.getOrigen(), formBean.getDestino(),
                 formBean.getTipoVuelo(), formBean.getPrecio(), formBean.getFechaPartida(), formBean.getHoraPartida(), formBean.getAvion(),
-                formBean.getEstado());
+                formBean.getEstado(),formBean.getAvion().getAsientosPorFila()*formBean.getAvion().getCapacidadFilas());
         
         System.out.println(formBean.getEstado());
         vueloService.programarVuelo(vuelo);

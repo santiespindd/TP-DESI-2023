@@ -33,7 +33,6 @@ public class VueloServiceImpl implements VueloService{
 
 	@Override
 	public List<Vuelo> findByFechaPartida(LocalDate fecha) {
-		// TODO Auto-generated method stub
 		return repo.findByFechaPartida(fecha);
 	}
 

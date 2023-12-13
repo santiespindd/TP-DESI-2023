@@ -37,11 +37,13 @@ public class VueloForm {
 	private Avion avion;
 	
 	private String estado;
+	
+	private int asientosDisponibles;
 
 	public VueloForm() {
 		super();
-	}
-	
+	}	
+
 	public VueloForm(Vuelo v) {
 		super();
 		this.id = v.getId();
@@ -54,6 +56,7 @@ public class VueloForm {
 		this.horaPartida = v.getHoraPartida();
 		this.avion = v.getAvion();
 		this.estado = v.getEstado();
+		this.asientosDisponibles = v.getAsientosDisponibles();
 	}
 
 
@@ -151,7 +154,15 @@ public class VueloForm {
 		v.setHoraPartida(this.getHoraPartida());
 		v.setAvion(this.getAvion());
 		v.setEstado(this.getEstado());
+		v.setAsientosDisponibles(this.getAsientosDisponibles());
 		return v;
+	}
+	public int getAsientosDisponibles() {
+		return asientosDisponibles;
+	}
+
+	public void setAsientosDisponibles(int asientosDisponibles) {
+		this.asientosDisponibles = asientosDisponibles;
 	}
 	
 }

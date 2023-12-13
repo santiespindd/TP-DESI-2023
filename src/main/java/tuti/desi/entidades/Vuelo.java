@@ -66,9 +66,9 @@ public class Vuelo {
 	
 	@NotNull
 	private String estado ;
-	
-	
 
+	private int asientosDisponibles;
+    
 	public Vuelo() {
 		super();
 	}
@@ -80,7 +80,7 @@ public class Vuelo {
 			@DecimalMin(value = "0.01", message = "El precio debe ser mayor a 0") BigDecimal precio,
 			@Future(message = "La fecha de partida debe ser futura") @NotNull(message = "La fecha de partida es requerida") LocalDate fechaPartida,
 			@NotNull(message = "La hora de partida es requerida") LocalTime horaPartida,
-			@NotNull() Avion avion, String estado) {
+			@NotNull() Avion avion, String estado, int asientosDisponibles) {
 		super();
 		this.id = id;
 		this.numeroVuelo = numeroVuelo;
@@ -92,6 +92,7 @@ public class Vuelo {
 		this.horaPartida = horaPartida;
 		this.avion = avion;
 		this.estado = estado;
+		this.asientosDisponibles = asientosDisponibles;
 	}
 
 	public Long getId() {
@@ -174,6 +175,13 @@ public class Vuelo {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	public int getAsientosDisponibles() {
+		return asientosDisponibles;
+	}
+
+	public void setAsientosDisponibles(int asientosDisponibles) {
+		this.asientosDisponibles = asientosDisponibles;
 	}
 	
 }
