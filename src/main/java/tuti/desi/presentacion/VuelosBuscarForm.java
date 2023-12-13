@@ -22,7 +22,7 @@ public class VuelosBuscarForm {
 	    private LocalDate fecha;
 	    private Long origenId;
 	    private Long destinoId;
-	    private String tipoVuelo;
+	    private TipoVuelo tipoVuelo;
 
 	    private List<Ciudad> ciudades;
 	    private List<TipoVuelo> tiposVuelo;
@@ -44,10 +44,10 @@ public class VuelosBuscarForm {
 		public void setDestinoId(Long destinoId) {
 			this.destinoId = destinoId;
 		}
-		public String getTipoVuelo() {
+		public TipoVuelo getTipoVuelo() {
 			return tipoVuelo;
 		}
-		public void setTipoVuelo(String tipoVuelo) {
+		public void setTipoVuelo(TipoVuelo tipoVuelo) {
 			this.tipoVuelo = tipoVuelo;
 		}
 		public List<Ciudad> getCiudades() {

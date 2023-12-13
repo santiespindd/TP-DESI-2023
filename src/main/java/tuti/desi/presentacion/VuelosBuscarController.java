@@ -1,7 +1,7 @@
 package tuti.desi.presentacion;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
@@ -38,6 +38,8 @@ public class VuelosBuscarController {
 	@GetMapping
 	public String prepararForm(Model model) {
 		VuelosBuscarForm form = new VuelosBuscarForm();
+		
+		
 		model.addAttribute("formBean", form);  
         model.addAttribute("ciudades", ciudadService.getAll());	
 		model.addAttribute("tiposVuelo", TipoVuelo.obtenerTodosLosTipos());
@@ -56,25 +58,46 @@ public class VuelosBuscarController {
         
 		if (action.equals("Buscar")) {
 			
-	        
 			try {
 				
 
-				List<Vuelo> vuelos = vueloService.findByFechaPartida(formBean.getFecha());
+				List<Vuelo> vuelos = vueloService.consultarVuelos(formBean.getFecha(), formBean.getOrigenId(), formBean.getDestinoId(), formBean.getTipoVuelo());
 				System.out.println("Número de vuelos encontrados: " + vuelos.size());
+				
+				
                 
 				
-				//vuelos.sort(Comparator.comparing(Vuelo::getFechaHoraPartida));
+				vuelos.sort(Comparator.comparing(Vuelo::getFechaPartida));
+				
+				if(vuelos.size() == 0 ) {
+					
+					model.addAttribute("error", "No se encontraron resultados");
+				}
+				
+				
 				model.addAttribute("resultados", vuelos);
+				
 			} catch (Exception e) {
 				result.reject("globalError", e.getMessage());
+				 System.out.println( e.getMessage());
 			}
 
 			model.addAttribute("formBean", formBean);
+			model.addAttribute("ciudades", ciudadService.getAll());
+		    model.addAttribute("tiposVuelo", TipoVuelo.obtenerTodosLosTipos());
 			return "vuelosBuscar";
 		}
+		
+		if ("Cancelar".equals(action)) {
 
-		return "vuelosBuscar";
+			return "redirect:/";
+		}
+		
+		model.addAttribute("ciudades", ciudadService.getAll());
+	    model.addAttribute("tiposVuelo", TipoVuelo.obtenerTodosLosTipos());
+	    
+	    return "vuelosBuscar";
+		
 
 	}
 

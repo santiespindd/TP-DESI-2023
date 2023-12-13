@@ -23,6 +23,7 @@ public interface VueloService {
 	
 	List<Vuelo>  findByFechaPartida(LocalDate fecha);
     
+	public List<Vuelo> consultarVuelos(LocalDate fecha, Long origenId, Long destinoId, Enum tipoVuelo);
 
 
 

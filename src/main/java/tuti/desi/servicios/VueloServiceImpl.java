@@ -37,7 +37,10 @@ public class VueloServiceImpl implements VueloService{
 		return repo.findByFechaPartida(fecha);
 	}
 
-	
+	 @Override
+	 public List<Vuelo> consultarVuelos(LocalDate fecha, Long origenId, Long destinoId, Enum tipoVuelo) {
+	        return repo.consultarVuelos(fecha, origenId, destinoId, tipoVuelo);
+	    }
 
   
    

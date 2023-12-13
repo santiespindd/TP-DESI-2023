@@ -1,92 +1,92 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Programar Vuelo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <style>
-        body {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-    </style>
-</head>
-<body>
 
-	<div class="starter-template">
-        <h1>Aerolíneas Argentinas</h1>
-        <h2>Programar Vuelo</h2>
-    </div>
-    
-<form th:action="@{/vueloProgramar}" th:object="${formBean}" method="post">
-	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
-	<table>
-		
-        <tr>
-            <td><label>Número de Vuelo:</label></td>
-            <td><input type="text" th:field="*{numeroVuelo}" required /></td>
-        </tr>
-        
-        <tr>
-            <td><label>Origen:</label></td>
-            <td>
-                <select th:field="*{origen}" required>
-                    <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
-                </select>
-            </td>
-        </tr>
-        
-        <tr>
-            <td><label>Destino:</label></td>
-            <td>
-                <select th:field="*{destino}" required>
-                    <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
-                </select>
-            </td>
-        </tr>
-        
-        <tr>
-            <td><label>Tipo de Vuelo:</label></td>
-            <td>
-                <select th:field="*{tipoVuelo}" required>
-                    <option value="NACIONAL">Nacional</option>
-                    <option value="INTERNACIONAL">Internacional</option>
-                </select>
-            </td>
-        </tr>
-        
-        <tr>
-            <td><label>Precio del Pasaje:</label></td>
-            <td><input type="number" th:field="*{precio}" step="0.01" required /></td>
-        </tr>
-        
-        <tr>
-            <td><label>Fecha de Partida:</label></td>
-            <td><input type="date" th:field="*{fechaPartida}" required /></td>
-            <td> <p th:if="${#fields.hasErrors('fechaPartida')}" th:errorclass="error" th:errors="*{fechaPartida}" /> </td> 
-        </tr>
-        <tr>
-	         <td><label for="horaIngresada">Hora de partida:</label></td>
-	        <td><input type="time" id="horaPartida" name="horaPartida" th:field="*{horaPartida}" required /> </td>
-	        <td> <p th:if="${#fields.hasErrors('fechaPartida')}" th:errorclass="error" th:errors="*{fechaPartida}" /> </td> 
-        </tr>
-        <tr>
-            <td><label>Avión:</label></td>
-            <td>
-                <select th:field="*{avion}" required>
-                    <option th:each="avion : ${aviones}" th:value="${avion.id}" th:text="${avion.nombre}"></option>
-                </select>
-            </td>
-        </tr>
-        
-    </table>    
-    
-    <input type="submit" name="action" value="Programar Vuelo">
-    
-</form>
+<head>
+
+	<title>Programar Vuelo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+</head>
+
+<body class="bg-light bg-gradient">
+
+	<h2 class="text-center titulo mt-3">Programar Vuelo</h2>
+
+
+	<div class="container">
+		<form class="container w-50" th:action="@{/vueloProgramar}" th:object="${formBean}" method="post">
+
+			<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+
+			<div class="m-3">
+				<label>Número de Vuelo:</label></td>
+				<input class="form-control" type="text" th:field="*{numeroVuelo}" required />
+			</div>
+
+			<div class="m-3">
+				<label>Origen:</label>
+				<select class="form-select" th:field="*{origen}" required>
+					<option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
+				</select>
+			</div>
+
+
+			<div class="m-3">
+				<label>Destino:</label>
+
+				<select class="form-select" th:field="*{destino}" required>
+					<option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
+				</select>
+			</div>
+
+			<div class="m-3">
+				<label>Tipo de Vuelo:</label>
+
+				<select class="form-select" th:field="*{tipoVuelo}" required>
+					<option value="NACIONAL">Nacional</option>
+					<option value="INTERNACIONAL">Internacional</option>
+				</select>
+			</div>
+
+			<div class="m-3">
+				<td><label>Precio del Pasaje:</label></td>
+				<td><input class="form-control" type="number" th:field="*{precio}" step="0.01" required /></td>
+			</div>
+
+			<div class="m-3">
+				<label>Fecha de Partida:</label>
+				<input class="form-control" type="date" th:field="*{fechaPartida}" required />
+				<p th:if="${#fields.hasErrors('fechaPartida')}" th:errorclass="error" th:errors="*{fechaPartida}" />
+			</div>
+
+			<div class="m-3">
+				<label for="horaIngresada">Hora de partida:</label></td>
+				<input class="form-control" type="time" id="horaPartida" name="horaPartida" th:field="*{horaPartida}"
+					required /> </td>
+				<p th:if="${#fields.hasErrors('fechaPartida')}" th:errorclass="error" th:errors="*{fechaPartida}" />
+			</div>
+
+
+			<div class="m-3">
+				<label>Avión:</label>
+
+				<select class="form-select" th:field="*{avion}" required>
+					<option th:each="avion : ${aviones}" th:value="${avion.id}" th:text="${avion.nombre}"></option>
+				</select>
+			</div>
+
+
+
+			<button type="submit" name="action" value="Programar Vuelo" class="btn btn-success list-button mx-3"> Programar
+				Vuelo </button>
+
+		</form>
+	</div>
+
+
 
 </body>
 
