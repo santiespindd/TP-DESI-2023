@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consultar Vuelos</title>
+    <!-- Otros encabezados y estilos aquí -->
+</head>
+<body>
+
+<h2>Consultar Vuelos</h2>
+
+<form th:action="@{/vuelosBuscar}" th:object="${formBean}" method="post">
+    <div>
+        <label for="fecha">Fecha:</label>
+        <input type="date"  th:field="*{fecha}" required />
+        <div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></div>
+
+    </div>
+
+    <div>
+        <label for="origen">Origen:</label>
+        <select id="origen" th:field="*{origenId}">
+			        <option value="">Seleccionar Origen</option>
+
+            <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
+        </select>
+    </div>
+
+    <div>
+        <label for="destino">Destino:</label>
+        <select id="destino" th:field="*{destinoId}">
+			        <option value="">Seleccionar Destino</option>
+
+            <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
+        </select>
+    </div>
+
+    <div>
+        <label for="tipoVuelo">Tipo de Vuelo:</label>
+        <select id="tipoVuelo" th:field="*{tipoVuelo}">
+		<option value="">Seleccionar Tipo </option>
+
+            <option th:each="tipo : ${tiposVuelo}" th:value="${tipo}" th:text="${tipo}"></option>
+        </select>
+    </div>
+
+    <!-- Otras secciones del formulario según los requisitos -->
+
+    <div>
+        <button type="submit" name="action" value="Buscar">Buscar</button>
+    </div>
+</form>
+
+<!-- Sección para mostrar los resultados de la consulta -->
+<div th:if="${not #lists.isEmpty(resultados)}">
+    <h3>Resultados:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Nro de vuelo</th>
+                <th>Tipo de Vuelo</th>
+                <th>Estado</th>
+                <th>Cantidad de asientos libres</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="vuelo : ${resultados}">
+                <td th:text="${#dates.format(vuelo.fechaPartida, 'yyyy-MM-dd ')}"></td>
+                <td th:text="${vuelo.numeroVuelo}"></td>
+                <td th:text="${vuelo.tipoVuelo}"></td>
+                <td th:text="${vuelo.estado}"></td>
+           
+                <td>...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

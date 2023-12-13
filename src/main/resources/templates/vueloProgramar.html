@@ -64,10 +64,15 @@
         </tr>
         
         <tr>
-            <td><label>Fecha y Hora de Partida:</label></td>
-            <td><input type="datetime-local" th:field="*{fechaHoraPartida}" required /></td>
+            <td><label>Fecha de Partida:</label></td>
+            <td><input type="date" th:field="*{fechaPartida}" required /></td>
+            <td> <p th:if="${#fields.hasErrors('fechaPartida')}" th:errorclass="error" th:errors="*{fechaPartida}" /> </td> 
         </tr>
-        
+        <tr>
+	         <td><label for="horaIngresada">Hora de partida:</label></td>
+	        <td><input type="time" id="horaPartida" name="horaPartida" th:field="*{horaPartida}" required /> </td>
+	        <td> <p th:if="${#fields.hasErrors('fechaPartida')}" th:errorclass="error" th:errors="*{fechaPartida}" /> </td> 
+        </tr>
         <tr>
             <td><label>Avión:</label></td>
             <td>

@@ -2,8 +2,11 @@ package tuti.desi.presentacion;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.OneToMany;
 import tuti.desi.entidades.Avion;
@@ -24,7 +27,11 @@ public class VueloForm {
 	
 	private BigDecimal precio;
 	
-	private LocalDateTime fechaHoraPartida;
+	
+    @DateTimeFormat(pattern = "yyyy-MM-dd")	
+	private Date fechaPartida;
+	
+	private LocalTime horaPartida;
 	
 	private Avion avion;
 	
@@ -42,7 +49,8 @@ public class VueloForm {
 		this.destino = v.getDestino();
 		this.tipoVuelo = v.getTipoVuelo();
 		this.precio = v.getPrecio();
-		this.fechaHoraPartida = v.getFechaHoraPartida();
+		this.fechaPartida = v.getFechaPartida();
+		this.horaPartida = v.getHoraPartida();
 		this.avion = v.getAvion();
 		this.estado = v.getEstado();
 	}
@@ -96,12 +104,22 @@ public class VueloForm {
 		this.precio = precio;
 	}
 
-	public LocalDateTime getFechaHoraPartida() {
-		return fechaHoraPartida;
+	
+
+	public Date getFechaPartida() {
+		return fechaPartida;
 	}
 
-	public void setFechaHoraPartida(LocalDateTime fechaHoraPartida) {
-		this.fechaHoraPartida = fechaHoraPartida;
+	public void setFechaPartida(Date fechaPartida) {
+		this.fechaPartida = fechaPartida;
+	}
+
+	public LocalTime getHoraPartida() {
+		return horaPartida;
+	}
+
+	public void setHoraPartida(LocalTime horaPartida) {
+		this.horaPartida = horaPartida;
 	}
 
 	public Avion getAvion() {
@@ -128,7 +146,8 @@ public class VueloForm {
 		v.setDestino(this.getDestino());
 		v.setPrecio(this.getPrecio());
 		v.setTipoVuelo(this.getTipoVuelo());
-		v.setFechaHoraPartida(this.fechaHoraPartida);
+		v.setFechaPartida(this.fechaPartida);
+		v.setHoraPartida(this.getHoraPartida());
 		v.setAvion(this.getAvion());
 		v.setEstado(this.getEstado());
 		return v;

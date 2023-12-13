@@ -47,7 +47,11 @@ public class CiudadServiceImpl implements CiudadService {
 			return repo.findByNombreOrIdProvincia(filter.getNombre(),filter.getProvinciaSeleccionada());
 				
 	}
-
+    
+	@Override
+	public boolean existeCiudad(Long ciudadId) {
+		return repo.existsById(ciudadId);	
+	    }
 
 
 	@Override

@@ -2,7 +2,11 @@ package tuti.desi.entidades;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,13 +53,21 @@ public class Vuelo {
 	
     @Future(message = "La fecha de partida debe ser futura")
     @NotNull(message = "La fecha de partida es requerida")
-	private LocalDateTime fechaHoraPartida;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fechaPartida;
+    
+    
+    
+    @NotNull(message = "La hora de partida es requerida")
+    
+	private LocalTime horaPartida;
 	
 	@ManyToOne
     @JoinColumn(name = "avion_id")
     private Avion avion;
 	
-	private String estado = "Normal";
+	@NotNull
+	private String estado ;
 	
 	
 
@@ -68,8 +80,9 @@ public class Vuelo {
 			@NotNull(message = "El destino es requerido") Ciudad destino,
 			@NotNull(message = "El tipo de vuelo es requerido") TipoVuelo tipoVuelo,
 			@DecimalMin(value = "0.01", message = "El precio debe ser mayor a 0") BigDecimal precio,
-			@Future(message = "La fecha de partida debe ser futura") @NotNull(message = "La fecha de partida es requerida") LocalDateTime fechaHoraPartida,
-			Avion avion, String estado) {
+			@Future(message = "La fecha de partida debe ser futura") @NotNull(message = "La fecha de partida es requerida") Date fechaPartida,
+			@NotNull(message = "La hora de partida es requerida") LocalTime horaPartida,
+			@NotNull() Avion avion, String estado) {
 		super();
 		this.id = id;
 		this.numeroVuelo = numeroVuelo;
@@ -77,7 +90,8 @@ public class Vuelo {
 		this.destino = destino;
 		this.tipoVuelo = tipoVuelo;
 		this.precio = precio;
-		this.fechaHoraPartida = fechaHoraPartida;
+		this.fechaPartida = fechaPartida;
+		this.horaPartida = horaPartida;
 		this.avion = avion;
 		this.estado = estado;
 	}
@@ -131,12 +145,21 @@ public class Vuelo {
 	}
 
 	
-	public LocalDateTime getFechaHoraPartida() {
-		return fechaHoraPartida;
+	
+	public Date getFechaPartida() {
+		return fechaPartida;
 	}
 
-	public void setFechaHoraPartida(LocalDateTime fechaHoraPartida) {
-		this.fechaHoraPartida = fechaHoraPartida;
+	public void setFechaPartida(Date fechaPartida) {
+		this.fechaPartida = fechaPartida;
+	}
+
+	public LocalTime getHoraPartida() {
+		return horaPartida;
+	}
+
+	public void setHoraPartida(LocalTime horaPartida) {
+		this.horaPartida = horaPartida;
 	}
 
 	public Avion getAvion() {

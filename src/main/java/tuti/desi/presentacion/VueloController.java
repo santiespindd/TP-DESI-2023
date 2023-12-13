@@ -12,23 +12,21 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import tuti.desi.entidades.Avion;
 import tuti.desi.entidades.Ciudad;
+import tuti.desi.entidades.EstadoVuelo;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.excepciones.Excepcion;
 import tuti.desi.servicios.AvionService;
-import tuti.desi.servicios.AvionServiceImpl;
 import tuti.desi.servicios.CiudadService;
-import tuti.desi.servicios.CiudadServiceImpl;
 import tuti.desi.servicios.VueloService;
-import tuti.desi.servicios.VueloServiceImpl;
+
 
 
 @Controller
@@ -47,6 +45,8 @@ public class VueloController {
     @GetMapping
     public String preparaForm(Model model) {
         VueloForm form = new VueloForm();
+        
+      
         model.addAttribute("formBean", form);
         List<Ciudad> ciudades = ciudadService.getAll();
         model.addAttribute("ciudades", ciudades);
@@ -58,6 +58,8 @@ public class VueloController {
     @PostMapping
     public ResponseEntity<String> submit(@ModelAttribute("formBean") @Valid VueloForm formBean, BindingResult result,
             ModelMap model, @RequestParam String action) throws Excepcion {
+    	
+    	  formBean.setEstado((EstadoVuelo.NORMAL).getEstado());
 
         if (result.hasErrors()) {
             StringBuilder errors = new StringBuilder();
@@ -71,13 +73,15 @@ public class VueloController {
             return ResponseEntity.badRequest().body("El origen o destino seleccionado no existe");
         }
 
-        if (vueloService.existeVueloParaMismoDia(formBean.getFechaHoraPartida(), formBean.getAvion().getId())) {
+        if (vueloService.existeVueloParaMismoDia(formBean.getFechaPartida(), formBean.getAvion().getId())) {
             return ResponseEntity.badRequest().body("Ya existe un vuelo programado para el mismo día para el avión seleccionado");
         }
-
+        
         Vuelo vuelo = new Vuelo(formBean.getId(), formBean.getNumeroVuelo(), formBean.getOrigen(), formBean.getDestino(),
-                formBean.getTipoVuelo(), formBean.getPrecio(), formBean.getFechaHoraPartida(), formBean.getAvion(),
+                formBean.getTipoVuelo(), formBean.getPrecio(), formBean.getFechaPartida(), formBean.getHoraPartida(), formBean.getAvion(),
                 formBean.getEstado());
+        
+        System.out.println(formBean.getEstado());
         vueloService.programarVuelo(vuelo);
         return ResponseEntity.ok("Vuelo programado exitosamente");
     }
