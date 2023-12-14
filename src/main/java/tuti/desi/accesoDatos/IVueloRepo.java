@@ -18,6 +18,10 @@ public interface IVueloRepo extends JpaRepository<Vuelo, Long> {
 
 	 List<Vuelo> findByFechaPartida(LocalDate fechaPartida);
 	 
+	 boolean existsByNumeroVuelo(String numeroVuelo);
+	 
+
+	 
 	 @Query("SELECT v FROM Vuelo v WHERE v.fechaPartida = :fecha " +
 	           "AND (:origenId IS NULL OR v.origen.id = :origenId) " +
 	           "AND (:destinoId IS NULL OR v.destino.id = :destinoId) " +

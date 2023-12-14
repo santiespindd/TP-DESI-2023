@@ -25,6 +25,7 @@ public interface VueloService {
     
 	public List<Vuelo> consultarVuelos(LocalDate fecha, Long origenId, Long destinoId, Enum tipoVuelo);
 
+	 public boolean existsByNumeroVuelo(String numeroVuelo);
 
 
 

@@ -40,8 +40,12 @@ public class VueloServiceImpl implements VueloService{
 	 public List<Vuelo> consultarVuelos(LocalDate fecha, Long origenId, Long destinoId, Enum tipoVuelo) {
 	        return repo.consultarVuelos(fecha, origenId, destinoId, tipoVuelo);
 	    }
+	 
+	 @Override
+    public boolean existsByNumeroVuelo(String numeroVuelo) {
+		 return repo.existsByNumeroVuelo(numeroVuelo);
+	 };
 
-  
    
     
    

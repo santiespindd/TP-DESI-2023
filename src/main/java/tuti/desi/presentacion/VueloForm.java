@@ -9,7 +9,12 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import tuti.desi.entidades.Avion;
 import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.TipoVuelo;
@@ -18,20 +23,31 @@ import tuti.desi.entidades.Vuelo;
 public class VueloForm {
     private Long id;
 	
+    
+    @Column(unique = true)
+    @NotBlank(message = "El número de vuelo es requerido")
     private String numeroVuelo;
 	
+    @NotNull(message = "El origen es requerido")
 	private Ciudad origen;
-	
+    @NotNull(message = "El destino es requerido")
 	private Ciudad destino;
 	
+    
+    @NotNull(message = "El tipo de vuelo es requerido")
     private TipoVuelo tipoVuelo;
 	
+    
+    @DecimalMin(value = "0.01", message = "El precio debe ser mayor a 0")
 	private BigDecimal precio;
 	
 	
     @DateTimeFormat(pattern = "yyyy-MM-dd")	
+    @Future(message = "La fecha de partida debe ser futura")
+    @NotNull(message = "La fecha de partida es requerida")
 	private LocalDate fechaPartida;
 	
+    @NotNull(message = "La hora de partida es requerida")
 	private LocalTime horaPartida;
 	
 	private Avion avion;

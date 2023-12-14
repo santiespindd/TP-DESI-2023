@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -30,6 +31,7 @@ public class Vuelo {
 
     @Column(unique = true)
     @NotBlank(message = "El número de vuelo es requerido")
+    
     private String numeroVuelo;
 	
 	@ManyToOne

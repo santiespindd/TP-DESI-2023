@@ -3,6 +3,7 @@ package tuti.desi.presentacion;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,42 +49,73 @@ public class VueloController {
         
       
         model.addAttribute("formBean", form);
-        List<Ciudad> ciudades = ciudadService.getAll();
-        model.addAttribute("ciudades", ciudades);
-        List<Avion> aviones = avionService.obtenerTodosLosAviones();
-        model.addAttribute("aviones", aviones);
+       
+      
         return "vueloProgramar";
     }
-
+    
+    
+    @ModelAttribute("ciudades")
+    public List<Ciudad> getAllCiudades() {
+        return this.ciudadService.getAll();
+    }
+    @ModelAttribute("aviones")
+    public List<Avion> getAllAviones(){
+    	
+    	return this.avionService.obtenerTodosLosAviones();
+    }
+    
+    
     @PostMapping
-    public ResponseEntity<String> submit(@ModelAttribute("formBean") @Valid VueloForm formBean, BindingResult result,
-            ModelMap model, @RequestParam String action) throws Excepcion {
+    public String submit(@ModelAttribute("formBean") @Valid VueloForm formBean, BindingResult result,
+    		 
+            Model model, @RequestParam String action) throws Excepcion {
     	
     	  formBean.setEstado((EstadoVuelo.NORMAL).getEstado());
-
-        if (result.hasErrors()) {
-            StringBuilder errors = new StringBuilder();
-            for (ObjectError error : result.getAllErrors()) {
-                errors.append(error.getDefaultMessage()).append("\n");
-            }
-            return ResponseEntity.badRequest().body(errors.toString());
-        }
-
-        if (!ciudadService.existeCiudad(formBean.getOrigen().getId()) || !ciudadService.existeCiudad(formBean.getDestino().getId())) {
-            return ResponseEntity.badRequest().body("El origen o destino seleccionado no existe");
-        }
-
-        if (vueloService.existeVueloParaMismoDia(formBean.getFechaPartida(), formBean.getAvion().getId())) {
-            return ResponseEntity.badRequest().body("Ya existe un vuelo programado para el mismo día para el avión seleccionado");
-        }
         
-        Vuelo vuelo = new Vuelo(formBean.getId(), formBean.getNumeroVuelo(), formBean.getOrigen(), formBean.getDestino(),
-                formBean.getTipoVuelo(), formBean.getPrecio(), formBean.getFechaPartida(), formBean.getHoraPartida(), formBean.getAvion(),
-                formBean.getEstado(),formBean.getAvion().getAsientosPorFila()*formBean.getAvion().getCapacidadFilas());
-        
-        System.out.println(formBean.getEstado());
-        vueloService.programarVuelo(vuelo);
-        return ResponseEntity.ok("Vuelo programado exitosamente");
+    	if("Programar Vuelo".equals(action)) {
+    		
+    		
+    		if (result.hasErrors()) {
+    			
+				return "/vueloProgramar";
+				
+			}
+
+    	        if (!ciudadService.existeCiudad(formBean.getOrigen().getId()) || !ciudadService.existeCiudad(formBean.getDestino().getId())) {
+    	        	model.addAttribute("error" ,"El origen o destino seleccionado no existe");
+    	        	
+    	        }
+
+    	        if (vueloService.existeVueloParaMismoDia(formBean.getFechaPartida(), formBean.getAvion().getId())) {
+    	        	
+    	            model.addAttribute("error" , "Ya existe un vuelo programado para el mismo día para el avión seleccionado");
+    	            
+    	          
+    	        }
+    	        if(vueloService.existsByNumeroVuelo(formBean.getNumeroVuelo())) {
+    	        	 model.addAttribute("error" , "Ya existe un vuelo con ese numero de vuelo");
+     	            
+     	           
+    	        }
+    	        else {
+    	        	 Vuelo vuelo = new Vuelo(formBean.getId(), formBean.getNumeroVuelo(), formBean.getOrigen(), formBean.getDestino(),
+    	    	                formBean.getTipoVuelo(), formBean.getPrecio(), formBean.getFechaPartida(), formBean.getHoraPartida(), formBean.getAvion(),
+    	    	                formBean.getEstado(),formBean.getAvion().getAsientosPorFila()*formBean.getAvion().getCapacidadFilas());
+    	    	        
+    	    	        System.out.println(formBean.getEstado());
+    	    	        vueloService.programarVuelo(vuelo);
+    	    	        model.addAttribute("alerta" , "Vuelo programado exitosamente");
+    	    	        
+    	        	
+    	        }
+    	        
+    	        return "/vueloProgramar";
+    	       
+    	}
+      
+     
+        return "redirect:/";
     }
     
 }
