@@ -18,7 +18,7 @@ public interface ProvinciaService {
 	 * Obtiene la lista completa de Provincias
 	 * @return Todas las Provincias
 	 */
-	@Deprecated
+	
 	List<Provincia> getAll();
 	
 	/**

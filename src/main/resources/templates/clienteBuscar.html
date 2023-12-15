@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{cliente.buscar.titulo}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+	<div class="starter-template">
+        <h1><span th:text="#{empresa}" /></h1>
+        <h2>
+            <span th:text="#{cliente.buscar.titulo}"/>
+        </h2>
+    </div>
+    
+<form  th:action="@{/clienteBuscar}" th:object="${cliente}" method="post">
+	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+	<table border="1" style="align-self: center;">
+		
+        <tr>
+            <td><label th:text="'DNI del cliente'" /></td>
+            <td><input type="text" th:field="*{dni}" /></td>
+        </tr>
+  
+  </table>
+  <table class="botones">
+
+      <tr>
+	      <td><input type="submit" name="action" value="Buscar" /></td>
+	      <td><input type="submit" name="action" value="Registrar nuevo" /></td>
+	      <td><input type="submit" name="action" value="Volver" /></td>
+      </tr>
+        
+    </table>
+    
+ <p/>   
+    <div th:if="${resultado != null}">
+    <table border="0" style="align-self: center;">
+		
+	    <tr>
+			<td th:text="'Apellido:'"/>
+			<td th:text="*{apellido}"/>
+		</tr>
+		<tr>
+			<td th:text="'Nombre:'"/>
+			<td th:text="*{nombre}"/>
+		</tr>
+	    <tr>
+			<td th:text="'Domicilio:'"/>
+			<td th:text="*{domicilio}"/>
+		</tr>
+		<tr>
+			<td th:text="'E-mail:'"/>
+			<td th:text="*{email}"/>
+		</tr>
+	    <tr>
+			<td th:text="'Fecha de Nacimiento:'"/>
+			<td th:text="*{fechaNac}"/>
+		</tr>
+	    <tr>
+			<td th:text="'Pasaporte N°:'"/>
+			<td th:text="*{pasaporte}"/>
+		</tr>
+    </table>
+ 	<p/>
+  	<table class="botones">
+
+      <tr>
+	      <td><input type="submit" name="action" value="Iniciar venta" /></td>
+      </tr>
+       
+    </table>
+    </div>
+                  
+</form>
+
+
+</body>
+</html>	

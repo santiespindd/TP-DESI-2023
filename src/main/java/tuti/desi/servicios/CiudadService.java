@@ -34,5 +34,7 @@ public interface CiudadService {
 	void deleteByid(Long id);
 
 	void save(Ciudad c) throws Excepcion;
+	
+	boolean existeCiudad(Long ciudadId);
 
 }
