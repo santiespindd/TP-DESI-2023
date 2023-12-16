@@ -60,7 +60,8 @@
 	<table  class="table table-striped container w-50">
         <thead>
             <tr>
-                <th scope="col">Fecha</th>
+                <th scope="col">Fecha Partida</th>
+                <th scope="col">Hora Partida</th>
                 <th scope="col">Nro de vuelo</th>
                 <th scope="col">Tipo de Vuelo</th>
                 <th scope="col">Estado</th>
@@ -70,6 +71,7 @@
         <tbody>
             <tr th:each="vuelo : ${resultados}">
                 <td th:text="${vuelo.fechaPartida}"></td>
+                <td th:text="${vuelo.horaPartida}"></td>
                 <td th:text="${vuelo.numeroVuelo}"></td>
                 <td th:text="${vuelo.tipoVuelo}"></td>
                 <td th:text="${vuelo.estado}"></td>
@@ -77,7 +79,7 @@
                          
             </tr>
             <tr th:if="${error}">
-				<td  colspan="6" >
+				<td  colspan="7" >
 					<div  class="alert alert-danger alert-dismissible fade show  text-center " role="alert">
 			    		<span th:text="${error}"></span>
 			    		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

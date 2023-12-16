@@ -31,7 +31,7 @@
 		<br />
 
 		<label>Tasa Aeroportuaria Nacional:</label>
-		<input class="form-control" type="text" th:field="*{tasaAeroportuariaNacional}" minlength="1" placeholder="0.00-99999.99%" required/>
+		<input class="form-control" type="text" th:field="*{tasaAeroportuariaNacional}" minlength="1" placeholder="Ingrese valor en $ARS" required/>
 		<div  th:if="${#fields.hasErrors('tasaAeroportuariaNacional')}" class="alert alert-danger alert-dismissible fade show" role="alert">
 			<span th:errors="*{tasaAeroportuariaNacional}"></span>
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -39,7 +39,7 @@
 		<br />
 
 		<label>Tasa Aeroportuaria Internacional:</label>
-		<input class="form-control" type="text" placeholder="0.00-99999.99%" th:field="*{tasaAeroportuariaInternacional}" minlength="1" required />
+		<input class="form-control" type="text" placeholder="Ingrese valor en $USD" th:field="*{tasaAeroportuariaInternacional}" minlength="1" required />
 		<div th:if="${#fields.hasErrors('tasaAeroportuariaInternacional')}" class="alert alert-danger alert-dismissible fade show" role="alert">
 			<span  th:errors="*{tasaAeroportuariaInternacional}"></span>
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -48,7 +48,7 @@
 		<br />
 
 		<label>Cotización del Dólar: $</label>
-		<input class="form-control" type="text" placeholder="0.00-99999.99%" th:field="*{cotizacionDolar}" minlength="1" required/>
+		<input class="form-control" type="text" placeholder="Ingrese valor en $ARS" th:field="*{cotizacionDolar}" minlength="1" required/>
 		<div th:if="${#fields.hasErrors('cotizacionDolar')}" class="alert alert-danger alert-dismissible fade show" role="alert">
 			<span  th:errors="*{cotizacionDolar}"></span>
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

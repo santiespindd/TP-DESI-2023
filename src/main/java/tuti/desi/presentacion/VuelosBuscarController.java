@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 
 import tuti.desi.servicios.CiudadService;
 import tuti.desi.servicios.VueloService;
+import tuti.desi.entidades.Avion;
 import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.TipoVuelo;
 import tuti.desi.entidades.Vuelo;
@@ -41,13 +42,26 @@ public class VuelosBuscarController {
 		
 		
 		model.addAttribute("formBean", form);  
-        model.addAttribute("ciudades", ciudadService.getAll());	
-		model.addAttribute("tiposVuelo", TipoVuelo.obtenerTodosLosTipos());
-		
+     
 		
 		return "vuelosBuscar";
 	}
-
+	
+	 @ModelAttribute("ciudades")
+	    public List<Ciudad> getAllOrigen() {
+	        return this.ciudadService.getAll();
+	    }
+	 
+	/* @ModelAttribute("destino")
+	    public List<Ciudad> getAllDestino() {
+	        return this.ciudadService.getAll();
+	    }*/
+	    @ModelAttribute("tiposVuelo")
+	    public List<String> getAllTipoVuelo(){
+	    	
+	    	return TipoVuelo.obtenerTodosLosTipos();
+	    }
+	    
 	@PostMapping
 	public String submit(@ModelAttribute("formBean") @Valid VuelosBuscarForm formBean, BindingResult result,
 			Model model, @RequestParam String action) {
@@ -67,7 +81,7 @@ public class VuelosBuscarController {
 				
                 
 				
-				vuelos.sort(Comparator.comparing(Vuelo::getFechaPartida));
+				vuelos.sort(Comparator.comparing(Vuelo::getHoraPartida));
 				
 				if(vuelos.size() == 0 ) {
 					
@@ -82,9 +96,7 @@ public class VuelosBuscarController {
 				 System.out.println( e.getMessage());
 			}
 
-			model.addAttribute("formBean", formBean);
-			model.addAttribute("ciudades", ciudadService.getAll());
-		    model.addAttribute("tiposVuelo", TipoVuelo.obtenerTodosLosTipos());
+			
 			return "vuelosBuscar";
 		}
 		
@@ -93,9 +105,7 @@ public class VuelosBuscarController {
 			return "redirect:/";
 		}
 		
-		model.addAttribute("ciudades", ciudadService.getAll());
-	    model.addAttribute("tiposVuelo", TipoVuelo.obtenerTodosLosTipos());
-	    
+    
 	    return "vuelosBuscar";
 		
 
