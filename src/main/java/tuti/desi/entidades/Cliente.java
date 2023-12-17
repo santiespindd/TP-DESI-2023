@@ -9,7 +9,6 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-//@ColumnOrder({"dni", "apellido", "nombre", "fecha_nacimiento", "domicilio", "email", "pasaporte"}) Disponible en versiones recientes de JPA
 public class Cliente {
 
 	@Id

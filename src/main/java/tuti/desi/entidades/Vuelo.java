@@ -3,6 +3,7 @@ package tuti.desi.entidades;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -73,8 +74,8 @@ public class Vuelo {
 
 	@ElementCollection
 	@CollectionTable(name="asientos_vuelos")
-	@Column(name="nro_asiento", nullable=true)
-	private List<Integer> asientosDisponibles;
+	@Column(name="nro_asiento")
+	private List<Integer> asientosDisponibles = new ArrayList<Integer>();
 	
 	public Vuelo() {
 		super();

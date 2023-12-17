@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tuti.desi.entidades.Cliente;
 import tuti.desi.servicios.ClienteService;
@@ -31,21 +32,21 @@ public class ClienteBuscarController {
 	}
 		
 	@PostMapping
-	public String submit (@ModelAttribute Cliente cliente, BindingResult result, ModelMap modelo, @RequestParam String action) {
+	public String submit (@ModelAttribute Cliente cliente, BindingResult result, ModelMap modelo, @RequestParam String action, RedirectAttributes redir) {
 		
     	if(action.equals("Buscar"))
     	{
     		
     		try {
     			cliente=servCliente.buscarPorDNI(cliente.getDni());
-    			modelo.addAttribute("resultado", cliente);
+    			modelo.addAttribute("encontrado", true);
+    			modelo.addAttribute("cliente", cliente);
     			
 			} catch (Exception e) {
 				ObjectError error = new ObjectError("globalError", "El DNI es incorrecto o no está registrado en el sistema");
 	            result.addError(error);
 			}
-    		
-    		modelo.addAttribute("cliente", cliente);
+     		
         	return "clienteBuscar";
 
     	} else if(action.equals("Cancelar"))
@@ -55,21 +56,15 @@ public class ClienteBuscarController {
     		return "redirect:/";
     	}
     	
-    	else if(action.equals("Registrar nuevo"))
-    	{
-    		modelo.clear();
-    		return "redirect:/ciudadEditar";
-    	}
     		
     	else if (action.equals("Iniciar venta"))
     	{
-    		modelo.addAttribute("cliente", cliente);
+    		redir.addAttribute("cliente", cliente);
     		return "redirect:/pasajeVender";
     	}
     	
     	else return "redirect:/";
-    	
-   
+    	   
 	}
 	
 }

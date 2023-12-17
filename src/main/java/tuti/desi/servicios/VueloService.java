@@ -28,6 +28,8 @@ public interface VueloService {
 	public boolean existsByNumeroVuelo(String numeroVuelo);
 	 
 	public List<Vuelo> listarTodos();
+	
+	public void reservarAsiento(Vuelo vuelo, Integer asiento);
 
 
 
