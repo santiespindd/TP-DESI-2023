@@ -2,6 +2,7 @@ package tuti.desi.presentacion;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -11,6 +12,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
+
+import java.time.LocalTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
+
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
@@ -54,7 +61,7 @@ public class VueloForm {
 	
 	private String estado;
 	
-	private int asientosDisponibles;
+
 
 	public VueloForm() {
 		super();
@@ -72,7 +79,7 @@ public class VueloForm {
 		this.horaPartida = v.getHoraPartida();
 		this.avion = v.getAvion();
 		this.estado = v.getEstado();
-		this.asientosDisponibles = v.getAsientosDisponibles();
+
 	}
 
 
@@ -124,7 +131,6 @@ public class VueloForm {
 		this.precio = precio;
 	}
 
-	
 
 	public LocalDate getFechaPartida() {
 		return fechaPartida;
@@ -170,15 +176,8 @@ public class VueloForm {
 		v.setHoraPartida(this.getHoraPartida());
 		v.setAvion(this.getAvion());
 		v.setEstado(this.getEstado());
-		v.setAsientosDisponibles(this.getAsientosDisponibles());
+		
 		return v;
-	}
-	public int getAsientosDisponibles() {
-		return asientosDisponibles;
-	}
-
-	public void setAsientosDisponibles(int asientosDisponibles) {
-		this.asientosDisponibles = asientosDisponibles;
 	}
 	
 }

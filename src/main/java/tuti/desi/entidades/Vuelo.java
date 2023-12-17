@@ -4,10 +4,21 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -69,8 +80,13 @@ public class Vuelo {
 	@NotNull
 	private String estado ;
 
-	private int asientosDisponibles;
-    
+
+	@ElementCollection
+	@CollectionTable(name="asientos_vuelos")
+	@Column(name="nro_asiento")
+	private List<Integer> asientosDisponibles = new ArrayList<Integer>();
+	
+
 	public Vuelo() {
 		super();
 	}
@@ -82,7 +98,8 @@ public class Vuelo {
 			@DecimalMin(value = "0.01", message = "El precio debe ser mayor a 0") BigDecimal precio,
 			@Future(message = "La fecha de partida debe ser futura") @NotNull(message = "La fecha de partida es requerida") LocalDate fechaPartida,
 			@NotNull(message = "La hora de partida es requerida") LocalTime horaPartida,
-			@NotNull() Avion avion, String estado, int asientosDisponibles) {
+			@NotNull() Avion avion, String estado, List<Integer> asientosDisponibles) {
+
 		super();
 		this.id = id;
 		this.numeroVuelo = numeroVuelo;
@@ -145,8 +162,7 @@ public class Vuelo {
 		this.precio = precio;
 	}
 
-	
-	
+
 	public LocalDate getFechaPartida() {
 		return fechaPartida;
 	}
@@ -178,11 +194,14 @@ public class Vuelo {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public int getAsientosDisponibles() {
+
+
+	public List<Integer> getAsientosDisponibles() {
 		return asientosDisponibles;
 	}
 
-	public void setAsientosDisponibles(int asientosDisponibles) {
+	public void setAsientosDisponibles(List<Integer> asientosDisponibles) {
+
 		this.asientosDisponibles = asientosDisponibles;
 	}
 	

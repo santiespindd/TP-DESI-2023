@@ -1,7 +1,9 @@
 package tuti.desi.presentacion;
 
 
+
 import java.time.LocalDate;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,13 +20,17 @@ import jakarta.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import tuti.desi.servicios.AvionService;
 import tuti.desi.servicios.CiudadService;
 import tuti.desi.servicios.VueloService;
+
 import tuti.desi.entidades.Avion;
 import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.TipoVuelo;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.presentacion.VuelosBuscarForm;
+
+
 
 @Controller
 @RequestMapping("/vuelosBuscar")
@@ -36,14 +42,15 @@ public class VuelosBuscarController {
 	@Autowired
 	private VueloService vueloService;
 
+	private AvionService avionService;
+
 	@GetMapping
 	public String prepararForm(Model model) {
 		VuelosBuscarForm form = new VuelosBuscarForm();
 		
 		
 		model.addAttribute("formBean", form);  
-     
-		
+
 		return "vuelosBuscar";
 	}
 	
@@ -52,16 +59,16 @@ public class VuelosBuscarController {
 	        return this.ciudadService.getAll();
 	    }
 	 
-	/* @ModelAttribute("destino")
-	    public List<Ciudad> getAllDestino() {
-	        return this.ciudadService.getAll();
-	    }*/
+
 	    @ModelAttribute("tiposVuelo")
 	    public List<String> getAllTipoVuelo(){
 	    	
 	    	return TipoVuelo.obtenerTodosLosTipos();
 	    }
-	    
+
+	   
+	
+
 	@PostMapping
 	public String submit(@ModelAttribute("formBean") @Valid VuelosBuscarForm formBean, BindingResult result,
 			Model model, @RequestParam String action) {
@@ -81,7 +88,9 @@ public class VuelosBuscarController {
 				
                 
 				
+
 				vuelos.sort(Comparator.comparing(Vuelo::getHoraPartida));
+
 				
 				if(vuelos.size() == 0 ) {
 					
@@ -96,7 +105,10 @@ public class VuelosBuscarController {
 				 System.out.println( e.getMessage());
 			}
 
-			
+
+			model.addAttribute("formBean", formBean);
+		
+
 			return "vuelosBuscar";
 		}
 		
@@ -105,7 +117,7 @@ public class VuelosBuscarController {
 			return "redirect:/";
 		}
 		
-    
+
 	    return "vuelosBuscar";
 		
 

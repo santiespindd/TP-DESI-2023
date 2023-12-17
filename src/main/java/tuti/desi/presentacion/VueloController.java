@@ -10,6 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -99,9 +108,17 @@ public class VueloController {
      	           
     	        }
     	        else {
-    	        	 Vuelo vuelo = new Vuelo(formBean.getId(), formBean.getNumeroVuelo(), formBean.getOrigen(), formBean.getDestino(),
+
+    	        	int totalAsientos = formBean.getAvion().getAsientosPorFila()*formBean.getAvion().getCapacidadFilas();
+    	        	List <Integer> asientosDisponibles = new ArrayList<Integer>();
+    	        	for (int i=1; i<=totalAsientos; i++) {
+    	        		asientosDisponibles.add(i);
+    	        	}
+    	        	
+    	        	Vuelo vuelo = new Vuelo(formBean.getId(), formBean.getNumeroVuelo(), formBean.getOrigen(), formBean.getDestino(),
     	    	                formBean.getTipoVuelo(), formBean.getPrecio(), formBean.getFechaPartida(), formBean.getHoraPartida(), formBean.getAvion(),
-    	    	                formBean.getEstado(),formBean.getAvion().getAsientosPorFila()*formBean.getAvion().getCapacidadFilas());
+    	    	                formBean.getEstado(),asientosDisponibles);
+
     	    	        
     	    	        System.out.println(formBean.getEstado());
     	    	        vueloService.programarVuelo(vuelo);

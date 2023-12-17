@@ -44,7 +44,24 @@ public class VueloServiceImpl implements VueloService{
 	 @Override
     public boolean existsByNumeroVuelo(String numeroVuelo) {
 		 return repo.existsByNumeroVuelo(numeroVuelo);
+
 	 };
+
+	
+
+	@Override
+	public List<Vuelo> listarTodos() {
+		
+		return repo.findAll();
+	}
+
+	@Override
+	public void reservarAsiento(Vuelo vuelo, Integer asiento) {
+		
+		vuelo.getAsientosDisponibles().remove(asiento);
+		repo.save(vuelo);
+		
+	};
 
    
     
